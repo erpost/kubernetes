@@ -35,18 +35,11 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF'
 
 # install kubernetes
-sudo yum -y install kubelet kubeadm kubectl
-
-# initialize kubeadm
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+sudo yum -y install kubelet kubeadm
 
 # start kubelet
 sudo systemctl start kubelet
 sudo systemctl enable kubelet
 
-# exit to standard user and set up directories and configurations
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-kubectl apply -f https://raw.githubusercontent.com/erpost/kubernetes/master/kube-flannel-master.yml
+# add node to master
+kubeadm join ...
