@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# sudo to root
-sudo su -
+############ run as root user ############
 
 # install Docker
-apt-get install -y docker.io
+apt install -y docker.io
 
 # set cgroup driver
 cat << EOF >> /etc/docker/daemon.json
@@ -22,18 +21,20 @@ deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
 # update packages
-apt-get update
+apt update
 
 # install packages
-apt-get install -y kubelet kubeadm kubectl
+apt install -y kubelet kubeadm kubectl
 
 # initialize kubeadm with flannel
 kubeadm init --pod-network-cidr=10.244.0.0/16
+
+############ run as standard user ############
 
 # exit to standard user and set up directories and configurations
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-# download flannel configuration file
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+# download flannel configuration file for networking
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
