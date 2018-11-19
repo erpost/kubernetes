@@ -44,7 +44,7 @@ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 sudo systemctl start kubelet
 sudo systemctl enable kubelet
 
-# exit to standard user and set up directories and configurations
+# set up directories and configurations
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
