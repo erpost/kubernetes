@@ -11,7 +11,7 @@ sudo yum -y install docker
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# add kubernetes repo
+# add the kubernetes repo
 sudo bash -c 'cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes

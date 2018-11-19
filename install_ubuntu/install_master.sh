@@ -12,7 +12,7 @@ cat << EOF >> /etc/docker/daemon.json
 }
 EOF
 
-# add repo key
+# add kubernetes repo key
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 # add sources
