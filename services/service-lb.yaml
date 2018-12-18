@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: la-lb-service
+spec:
+  selector:
+    app:  la-lb
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9376
+  clusterIP:  <cluster IP>
+  loadBalancerIP: <load balancer IP>
+  type: LoadBalancer
